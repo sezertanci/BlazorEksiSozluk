@@ -1,0 +1,77 @@
+﻿@using BlazorEksiSozluk.WebApp.Infrastructure.Models
+@using Blazored.LocalStorage
+
+<div class="container">
+    <span>
+        <a class="p-1" title="Up Vote!">
+            <span class="oi oi-arrow-top entry-vote @(VoteType == VoteType.UpVote ? "text-success" : "text-secondary")" @onclick="(() => UpClicked())"></span>
+        </a>
+    </span>
+    <span>
+        <a class="p-3" title="Down Vote!">
+            <span class="oi oi-arrow-bottom entry-vote @(VoteType == VoteType.DownVote ? "text-danger" : "text-secondary")" @onclick="(() => DownClicked())"></span>
+        </a>
+    </span>
+
+    <EntryFooterFavoriteComponent EntryId="@EntryId" FavoritedCount="@FavoritedCount" IsFavorited="@IsFavorited" OnFavoriteClicked="@FavoritedClicked" />
+</div>
+
+@code {
+    [Inject]
+    ISyncLocalStorageService syncLocalStorageService { get; set; }
+
+    [Parameter]
+    public VoteType VoteType { get; set; }
+
+    [Parameter]
+    public EventCallback<FavoriteClickedEventArgs> OnFavoriteClicked { get; set; }
+
+    [Parameter]
+    public EventCallback<VoteClickedEventArgs> OnVoteClicked { get; set; }
+
+    [Parameter]
+    public bool IsFavorited { get; set; }
+
+    [Parameter]
+    public Guid? EntryId { get; set; }
+
+    [Parameter]
+    public int FavoritedCount { get; set; }
+
+    private async Task FavoritedClicked()
+    {
+        IsFavorited = !IsFavorited;
+
+        var eventArgs = new FavoriteClickedEventArgs();
+        eventArgs.IsFaved = IsFavorited;
+        eventArgs.EntryId = EntryId;
+
+        await OnFavoriteClicked.InvokeAsync(eventArgs);
+
+        StateHasChanged();
+    }
+
+    private async Task UpClicked()
+    {
+        var eventArgs = new VoteClickedEventArgs();
+        eventArgs.EntryId = EntryId;
+        eventArgs.IsUpVoteClicked = true;
+        eventArgs.IsUpVoteDeleted = VoteType == VoteType.UpVote;
+
+        await OnVoteClicked.InvokeAsync(eventArgs);
+
+        StateHasChanged();
+    }
+
+    private async Task DownClicked()
+    {
+        var eventArgs = new VoteClickedEventArgs();
+        eventArgs.EntryId = EntryId;
+        eventArgs.IsDownVoteClicked = true;
+        eventArgs.IsDownVoteDeleted = VoteType == VoteType.DownVote;
+
+        await OnVoteClicked.InvokeAsync(eventArgs);
+
+        StateHasChanged();
+    }
+}
