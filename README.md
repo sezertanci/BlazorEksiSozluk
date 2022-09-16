@@ -3,7 +3,7 @@
 ## Kullanılanlar
 
 CQRS Mimarisi</br>
-.Net 5</br>
+.Net 6</br>
 EntityFrameworkCore</br>
 WebApi</br>
 Blazor</br>
