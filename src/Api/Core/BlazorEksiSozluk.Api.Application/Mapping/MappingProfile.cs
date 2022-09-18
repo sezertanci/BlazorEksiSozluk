@@ -12,6 +12,7 @@ namespace BlazorEksiSozluk.Api.Application.Mapping
             CreateMap<User, LoginUserViewModel>().ReverseMap();
             CreateMap<User, CreateUserCommand>().ReverseMap();
             CreateMap<User, UpdateUserCommand>().ReverseMap();
+            CreateMap<User, UserDetailViewModel>().ReverseMap();
             CreateMap<Entry, CreateEntryCommand>().ReverseMap();
             CreateMap<EntryComment, CreateEntryCommentCommand>().ReverseMap();
             CreateMap<Entry, GetEntriesViewModel>()

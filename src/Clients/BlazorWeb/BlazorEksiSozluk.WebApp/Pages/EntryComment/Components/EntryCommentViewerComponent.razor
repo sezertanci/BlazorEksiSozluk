@@ -6,7 +6,7 @@
         <div class="card-body col-md-12">
             <p class="entry-content">@EntryComment.Content</p>
 
-            <EntryFooterRateFavoriteComponent EntryId="@EntryComment.Id"
+            <EntryFooterRateFavoriteComponent EntryCommentId="@EntryComment.Id"
                                           OnFavoriteClicked="@OnFavoriteClicked"
                                           FavoritedCount="@EntryComment.FavoritedCount"
                                           IsFavorited="@EntryComment.Favorited"
@@ -36,13 +36,13 @@
     {
         if(args.IsFaved)
         {
-            await favoriteService.CreateEntryFavorite((Guid)args.EntryId);
+            await favoriteService.CreateEntryCommentFavorite((Guid)args.EntryCommentId);
             EntryComment.Favorited = true;
             EntryComment.FavoritedCount++;
         }
         else
         {
-            await favoriteService.DeleteEntryFavorite((Guid)args.EntryId);
+            await favoriteService.DeleteEntryCommentFavorite((Guid)args.EntryCommentId);
             EntryComment.Favorited = false;
             EntryComment.FavoritedCount--;
         }
@@ -54,7 +54,7 @@
     {
         if(args.IsUpVoteDeleted || args.IsDownVoteDeleted)
         {
-            await voteService.DeleteEntryVote((Guid)args.EntryId);
+            await voteService.DeleteEntryCommentVote((Guid)args.EntryCommentId);
             EntryComment.VoteType = VoteType.None;
 
             return;
@@ -62,7 +62,7 @@
 
         if(args.IsUpVoteClicked)
         {
-            await voteService.CreateEntryUpVote((Guid)args.EntryId);
+            await voteService.CreateEntryCommentUpVote((Guid)args.EntryCommentId);
             EntryComment.VoteType = VoteType.UpVote;
 
             return;
@@ -70,7 +70,7 @@
 
         if(args.IsDownVoteClicked)
         {
-            await voteService.CreateEntryDownVote((Guid)args.EntryId);
+            await voteService.CreateEntryCommentDownVote((Guid)args.EntryCommentId);
             EntryComment.VoteType = VoteType.DownVote;
 
             return;

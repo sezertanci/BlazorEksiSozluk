@@ -37,7 +37,7 @@
 
     private int currentPage = 1;
 
-    protected override async void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
         entry = await entryService.GetEntryDetail(id);
 
@@ -55,6 +55,6 @@
 
     private async Task RefreshComments(int pageNumber)
     {
-        comments = await entryService.GetEntryComments(entry.Id, pageNumber, 10);
+        comments = await entryService.GetEntryComments(entry.Id, pageNumber, 5);
     }
 }

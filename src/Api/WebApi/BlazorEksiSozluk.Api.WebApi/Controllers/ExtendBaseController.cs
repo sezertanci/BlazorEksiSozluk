@@ -8,7 +8,7 @@ namespace BlazorEksiSozluk.Api.WebApi.Controllers
     [ApiController]
     public class ExtendBaseController : ControllerBase
     {
-        public Guid? UserId => new(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        public Guid? UserId => new(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier) == null ? Guid.Empty.ToString() : HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
         private IMediator? _mediator;
         protected IMediator? mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();

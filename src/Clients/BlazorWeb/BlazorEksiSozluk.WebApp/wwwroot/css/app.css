@@ -66,13 +66,13 @@ label {
 }
 
 .list-group-item {
-    background-color: #2d2d2d;
-    color: #bdbdbd;
+    background-color: #4f4f4f;
+    color: #ffffff;
     padding: 8px 10px 8px 2px;
 }
 
     .list-group-item a {
-        color: #bdbdbd;
+        color: #ffffff;
         font-size: 14px;
     }
 
@@ -83,7 +83,13 @@ label {
 
 .entry-subject {
     color: #bdbdbd;
+    font-size: 25px;
+    color: aquamarine;
 }
+
+    .entry-subject:hover {
+        text-decoration: underline;
+    }
 
 .entry-content {
     color: #bdbdbd;
@@ -145,7 +151,7 @@ label {
 
 .entry-comment-add-container {
     background-color: #1c1c1c !important;
-    padding: 25px 20px 20px 20px;
+    padding: 25px 15px 15px 15px;
 }
 
 .entry-comment-add {
@@ -155,13 +161,14 @@ label {
 
 .entry-comment-actions {
     padding: 25px 15px 15px 15px;
+    text-align: right;
 }
 
 .entry-comment-textarea {
     background-color: #494949;
     width: 100%;
     color: white;
-    height: 250px;
+    height: 100px;
     border-color: #494949;
     border-radius: 3px;
     outline: none !important;

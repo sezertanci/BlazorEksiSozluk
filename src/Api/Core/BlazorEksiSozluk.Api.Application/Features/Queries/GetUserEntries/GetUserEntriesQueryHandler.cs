@@ -20,17 +20,19 @@ namespace BlazorEksiSozluk.Api.Application.Features.Queries.GetUserEntries
         {
             var query = entryRepository.AsQueryable();
 
-            if(request.UserId.HasValue)
+            if(request.UserId != Guid.Empty)
                 query = query.Where(x => x.UserId == request.UserId);
             else if(!string.IsNullOrEmpty(request.UserName))
                 query = query.Where(x => x.User.UserName == request.UserName);
             else return null;
 
             query = query.Include(x => x.EntryFavorites)
-                         .Include(x => x.User);
+                         .Include(x => x.User)
+                         .OrderByDescending(x => x.CreateDate);
 
             var list = query.Select(x => new GetUserEntriesDetailViewModel()
             {
+                Id = x.Id,
                 Content = x.Content,
                 CreatedDate = x.CreateDate,
                 Favorited = false,

@@ -36,6 +36,9 @@
     public Guid? EntryId { get; set; }
 
     [Parameter]
+    public Guid? EntryCommentId { get; set; }
+
+    [Parameter]
     public int FavoritedCount { get; set; }
 
     private async Task FavoritedClicked()
@@ -45,6 +48,7 @@
         var eventArgs = new FavoriteClickedEventArgs();
         eventArgs.IsFaved = IsFavorited;
         eventArgs.EntryId = EntryId;
+        eventArgs.EntryCommentId = EntryCommentId;
 
         await OnFavoriteClicked.InvokeAsync(eventArgs);
 
@@ -54,6 +58,7 @@
     private async Task UpClicked()
     {
         var eventArgs = new VoteClickedEventArgs();
+        eventArgs.EntryCommentId = EntryCommentId;
         eventArgs.EntryId = EntryId;
         eventArgs.IsUpVoteClicked = true;
         eventArgs.IsUpVoteDeleted = VoteType == VoteType.UpVote;
@@ -66,6 +71,7 @@
     private async Task DownClicked()
     {
         var eventArgs = new VoteClickedEventArgs();
+        eventArgs.EntryCommentId = EntryCommentId;
         eventArgs.EntryId = EntryId;
         eventArgs.IsDownVoteClicked = true;
         eventArgs.IsDownVoteDeleted = VoteType == VoteType.DownVote;
