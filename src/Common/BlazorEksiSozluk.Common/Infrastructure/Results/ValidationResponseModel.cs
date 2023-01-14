@@ -16,12 +16,12 @@ namespace BlazorEksiSozluk.Common.Infrastructure.Results
 
         public ValidationResponseModel(IEnumerable<string> errors)
         {
-            Errors = errors;
+            this.errors = errors;
         }
 
-        public IEnumerable<string> Errors { get; set; }
+        public IEnumerable<string> errors { get; set; }
 
         [JsonIgnore]
-        public string FlattenErrors => Errors != null ? string.Join(Environment.NewLine, Errors) : string.Empty;
+        public string FlattenErrors => errors != null ? string.Join(Environment.NewLine, errors) : string.Empty;
     }
 }

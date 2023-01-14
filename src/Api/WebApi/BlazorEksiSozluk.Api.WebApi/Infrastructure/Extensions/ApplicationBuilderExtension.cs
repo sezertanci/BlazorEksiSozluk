@@ -69,8 +69,8 @@ public static class ApplicationBuilderExtension
     private static void LogWrite(Exception exception)
     {
         string divider = "-";
-        string txtMessage = "\n" + DateTime.Now.ToString("F") + "\t" + divider.PadRight(200, '-') + "\n";
-        txtMessage += exception.ToString();
+        string txtMessage = divider.PadLeft(20, '-') + "\t" + DateTime.Now.ToString("F") + "\t" + divider.PadRight(20, '-') + "\n";
+        txtMessage += exception.ToString() + "\n";
 
         using(StreamWriter writetext = new("ExceptionLog.txt", true))
         {
